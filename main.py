@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 __author__ = '@britodfbr'
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
 @app.route('/')
 @app.route('/home')
 def hello_world():
-    return '<h1>Hello, World</h1> <p>Hello, World!</p>'
+    return render_template('home.html')
 
 
 @app.route('/contato')
 def contato():
-    return "Qualquer dúvida entre em contado pelo email contato@incolume.com.br"
+    return render_template('contato.html')
 
 
 if __name__ == '__main__':
