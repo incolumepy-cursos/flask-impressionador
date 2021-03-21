@@ -6,7 +6,7 @@ app = Flask(__name__)
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 
-@app.route('/hello')
+@app.route('/sobre-nos')
 def hello_world():
     return render_template('home.html')
 
