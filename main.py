@@ -8,7 +8,14 @@ lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 @app.route('/sobre-nos')
 def hello_world():
-    return render_template('home.html')
+    return '''<center>
+    <H1>Junta Especializada de Desenvolvimento e Inovação (JEDI)</H1>
+        <a href="/">
+            <img src="img/jedi_logo0.png" />
+            HOME
+        </a>
+    </center>
+    '''
 
 
 @app.route('/')
