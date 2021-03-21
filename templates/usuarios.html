@@ -2,5 +2,15 @@
 
 {% block body%}
 <h1>Usuários</h1>
-<p>{{lista_usuarios}}</p>
+<!-- <p>{{lista_usuarios}}</p> -->
+{% for usuarios in lista_usuarios %}
+<p>{{usuarios}}</p> <hr />
+{% endfor %}
+
+<ol>
+    {% for usuarios in lista_usuarios %}
+    <li>{{usuarios}}</li>
+    {% endfor %}
+</ol>
+
 {% endblock %}
