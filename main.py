@@ -6,6 +6,11 @@ app = Flask(__name__)
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
 @app.route('/sobre-nos')
 def hello_world():
     return '''<center>
