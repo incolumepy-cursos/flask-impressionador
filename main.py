@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 __author__ = '@britodfbr'
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 app = Flask(__name__)
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
-@app.route('/')
-@app.route('/home')
+
+@app.route('/hello')
 def hello_world():
+    return render_template('home.html')
+
+
+@app.route('/')
+def home():
     return render_template('home.html')
 
 
