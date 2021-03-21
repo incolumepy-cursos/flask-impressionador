@@ -3,7 +3,7 @@
 __author__ = '@britodfbr'
 from flask import Flask, render_template
 app = Flask(__name__)
-
+lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 @app.route('/')
 @app.route('/home')
@@ -14,6 +14,11 @@ def hello_world():
 @app.route('/contato')
 def contato():
     return render_template('contato.html')
+
+
+@app.route('/usuarios')
+def usuarios():
+    return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
 
 if __name__ == '__main__':
