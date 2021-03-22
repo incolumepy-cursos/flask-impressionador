@@ -2,13 +2,18 @@
 # -*- coding: utf-8 -*-
 __author__ = '@britodfbr'
 from flask import Flask, render_template, url_for
+from forms import FormCriarConta, FormLogin
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'b3612c4882b0dbe427aef77d018686bcf366f4886c6eabee'
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    form_login = FormLogin()
+    form_criar_conta = FormCriarConta()
+    return render_template('login.html', form_login=form_login, form_criar_conta=form_criar_conta)
 
 
 @app.route('/sobre-nos')
