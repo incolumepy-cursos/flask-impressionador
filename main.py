@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'b3612c4882b0dbe427aef77d018686bcf366f4886c6eabee'
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form_login = FormLogin()
     form_criar_conta = FormCriarConta()
