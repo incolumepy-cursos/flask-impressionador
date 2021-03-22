@@ -2,14 +2,54 @@
 
 {% block body%}
 <div class="container">
+    <h2> Acesso </h2>
+    <hr />
   <div class="row">
     <div class="col">
-        <h2>Login</h2>
-        {{form_login}}
+        <form method="POST" action="" class="border p-4 mt-2">
+            <legend>Login</legend>
+            <fieldset>
+                <div class="form-group">
+                    {{form_login.email.label(class="form-control-label")}}
+                    {{form_login.email(class="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{form_login.password.label(class="form-control-label")}}
+                    {{form_login.password(class="form-control")}}
+                </div>
+                {{form_login.lembrar_dados.label}}
+                {{form_login.lembrar_dados(class="form-check-input")}}
+            </fieldset>
+            {{form_login.submit_login(class="btn btn-primary mt-2")}}
+        </form>
     </div>
     <div class="col">
-        <h2>Criar Conta</h2>
-        {{form_criar_conta}}
+        <form method="POST" action="" class="border p-4 mt-2">
+            <legend>Criar Conta</legend>
+            <fieldset>
+                <div class="form-group">
+                    {{form_criar_conta.username.label(class="form-control-label")}}
+                    {{form_criar_conta.username(class="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{form_criar_conta.email.label(class="form-control-label")}}
+                    {{form_criar_conta.email(class="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{form_criar_conta.email_confirmation.label(class="form-control-label")}}
+                    {{form_criar_conta.email_confirmation(class="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{form_criar_conta.password.label(class="form-control-label")}}
+                    {{form_criar_conta.password(class="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{form_criar_conta.password_confirmation.label(class="form-control-label")}}
+                    {{form_criar_conta.password_confirmation(class="form-control")}}
+                </div>
+            </fieldset>
+            {{form_criar_conta.submit_criar_conta(class="btn btn-primary mt-2")}}
+        </form>
     </div>
   </div>
 </div>
