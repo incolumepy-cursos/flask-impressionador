@@ -14,10 +14,10 @@ def login():
     form_login = FormLogin()
     form_criar_conta = FormCriarConta()
     if form_login.validate_on_submit() and 'submit_login' in request.form:
-        flash(f'Login realizado com sucesso: {form_login.email.data}!')
+        flash(f'Login realizado com sucesso: {form_login.email.data}!', 'alert-success')
         return redirect(url_for('home'))
     if form_criar_conta.validate_on_submit() and 'submit_criar_conta' in request.form:
-        flash(f'Conta criada com sucesso: {form_criar_conta.email_confirmation.data}')
+        flash(f'Conta criada com sucesso: {form_criar_conta.email_confirmation.data}', 'alert-success')
         return redirect(url_for('home'))
     return render_template('login.html', form_login=form_login, form_criar_conta=form_criar_conta)
 
