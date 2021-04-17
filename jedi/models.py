@@ -3,7 +3,7 @@
 __author__ = '@britodfbr'
 
 from datetime import datetime
-from main import database
+from jedi import database
 
 
 class Usuario(database.Model):
