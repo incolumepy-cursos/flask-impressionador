@@ -3,10 +3,16 @@
 __author__ = '@britodfbr'
 from flask import Flask, render_template, url_for, request, flash, redirect
 from forms import FormCriarConta, FormLogin
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'b3612c4882b0dbe427aef77d018686bcf366f4886c6eabee'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jedi_db.sqlite'
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
+
+
+database = SQLAlchemy(app)
 
 
 @app.route('/login', methods=['GET', 'POST'])
