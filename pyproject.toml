@@ -33,6 +33,7 @@ python = "^3.8"
 Flask = "^1.1.2"
 Flask-WTF = "^0.14.3"
 email-validator = "^1.1.2"
+Flask-SQLAlchemy = "^2.5.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
