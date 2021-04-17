@@ -11,7 +11,7 @@ class Usuario(database.Model):
     username = database.Column(database.String, nullable=False)
     email = database.Column(database.String, nullable=False, unique=True)
     password = database.Column(database.String, nullable=False)
-    foto = database.Column(database.String, default='default.png')
+    foto = database.Column(database.String, default='user_color.svg')
     posts = database.relationship('Post', backref='author', lazy=True)
     cursos = database.Column(database.String, nullable=False, default='Não Informado')
 
