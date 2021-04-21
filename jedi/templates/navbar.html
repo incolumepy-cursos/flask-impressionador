@@ -36,12 +36,24 @@
         -->
       </ul>
       <ul class="navbar-nav d-flex">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ url_for('login') }}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ url_for('login') }}">Criar conta</a>
-        </li>
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('criar_post') }}">Novo Post</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('perfil') }}">Perfil</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('logout') }}">Sair</a>
+          </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('login') }}">Criar conta</a>
+            </li>
+          {% endif %}
       </ul>
         <!--
       <form class="d-flex">
