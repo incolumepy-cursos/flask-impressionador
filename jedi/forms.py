@@ -7,7 +7,8 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
 class FormCriarConta(FlaskForm):
-    username = StringField('Nome de Usuário', validators=[DataRequired()])
+    fullname = StringField('Nome de Usuário', validators=[DataRequired()])
+    username = StringField('Nickname', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     email_confirmation = StringField('Email confimação', validators=[DataRequired(), EqualTo('email')])
     password = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
