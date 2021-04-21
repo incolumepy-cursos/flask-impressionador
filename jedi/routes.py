@@ -4,7 +4,7 @@ __author__ = '@britodfbr'
 
 from jedi import app, database, bcrypt
 from jedi.models import Usuario
-from jedi.forms import FormCriarConta, FormLogin
+from jedi.forms import FormCriarConta, FormLogin, FormEditarPerfil
 from flask import render_template, url_for, request, flash, redirect
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -80,6 +80,14 @@ def logout():
 def perfil():
     foto_perfil = url_for('static', filename=f'foto_perfil/{current_user.foto}')
     return render_template('perfil.html', foto_perfil=foto_perfil)
+
+
+@app.route('/perfil/editar', methods=['GET', 'POST'])
+@login_required
+def perfil_editar():
+    form = FormEditarPerfil()
+    foto_perfil = url_for('static', filename=f'foto_perfil/{current_user.foto}')
+    return render_template('perfil_editar.html', form=form, foto_perfil=foto_perfil, usuario=current_user)
 
 
 @app.route('/post/criar')

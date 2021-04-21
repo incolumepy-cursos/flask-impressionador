@@ -14,11 +14,15 @@
                     <div class="d-flex flex-column"> <span class="rating">Posts</span> <span class="number3">89</span> </div>
                 </div>
                 <div class="button mt-2 d-flex flex-row align-items-center">
-                    <button class="btn btn-sm btn-outline-primary w-100">Editar Perfil</button>
+                    <a href=" {{ url_for('perfil_editar') }} " class="w-100">
+                        <button class="btn btn-sm btn-outline-primary w-100">Editar Perfil</button>
+                    </a>
                    <!-- <button class="btn btn-sm btn-primary w-100 ml-2">Follow</button> -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+  {% block form_editar_perfil %}
+  {% endblock %}
 {% endblock %}
