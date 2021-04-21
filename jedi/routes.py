@@ -6,7 +6,7 @@ from jedi import app, database, bcrypt
 from jedi.models import Usuario
 from jedi.forms import FormCriarConta, FormLogin
 from flask import render_template, url_for, request, flash, redirect
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
@@ -58,11 +58,13 @@ def contato():
 
 
 @app.route('/usuarios')
+@login_required
 def usuarios():
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
 
 @app.route('/sair')
+@login_required
 def logout():
     logout_user()
     flash(f'Logout com sucesso!', 'alert-success')
@@ -70,10 +72,12 @@ def logout():
 
 
 @app.route('/perfil')
+@login_required
 def perfil():
     return render_template('perfil.html')
 
 
 @app.route('/post/criar')
+@login_required
 def criar_post():
     return render_template('post_criar.html')
