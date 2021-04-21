@@ -3,10 +3,15 @@
 __author__ = '@britodfbr'
 
 from datetime import datetime
-from jedi import database
+from jedi import database, login_manager
+from flask_login import UserMixin
+
+@login_manager.user_loader
+def load_user(id_user):
+    return Usuario.query.get(int(id_user))
 
 
-class Usuario(database.Model):
+class Usuario(database.Model, UserMixin):
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String, nullable=False)
     email = database.Column(database.String, nullable=False, unique=True)

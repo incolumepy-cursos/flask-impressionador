@@ -6,6 +6,7 @@ from jedi import app, database, bcrypt
 from jedi.models import Usuario
 from jedi.forms import FormCriarConta, FormLogin
 from flask import render_template, url_for, request, flash, redirect
+from flask_login import login_user, logout_user, current_user
 
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
@@ -15,8 +16,14 @@ def login():
     form_login = FormLogin()
     form_criar_conta = FormCriarConta()
     if form_login.validate_on_submit() and 'submit_login' in request.form:
-        flash(f'Login realizado com sucesso: {form_login.email.data}!', 'alert-success')
-        return redirect(url_for('home'))
+        usuario = Usuario.query.filter_by(email=form_login.email.data).first()
+        if usuario and bcrypt.check_password_hash(usuario.password, form_login.password.data):
+            login_user(usuario, remember=form_login.lembrar_dados.data)   # Efetivar login
+            flash(f'Login realizado com sucesso: {form_login.email.data}!', 'alert-success')
+            return redirect(url_for('home'))
+        else:
+            flash(f'Login ou Senha incorretos', 'alert-danger')
+
     if form_criar_conta.validate_on_submit() and 'submit_criar_conta' in request.form:
         usuario = Usuario(username=form_criar_conta.username.data,
                           password=bcrypt.generate_password_hash(form_criar_conta.password.data),
@@ -53,3 +60,20 @@ def contato():
 @app.route('/usuarios')
 def usuarios():
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
+
+
+@app.route('/sair')
+def logout():
+    logout_user()
+    flash(f'Logout com sucesso!', 'alert-success')
+    return redirect(url_for('home'))
+
+
+@app.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
+
+
+@app.route('/post/criar')
+def criar_post():
+    return render_template('post_criar.html')
