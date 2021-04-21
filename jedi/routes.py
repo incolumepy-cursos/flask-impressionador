@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 __author__ = '@britodfbr'
 
-from jedi import app
+from jedi import app, database, bcrypt
+from jedi.models import Usuario
 from jedi.forms import FormCriarConta, FormLogin
 from flask import render_template, url_for, request, flash, redirect
 
@@ -17,6 +18,11 @@ def login():
         flash(f'Login realizado com sucesso: {form_login.email.data}!', 'alert-success')
         return redirect(url_for('home'))
     if form_criar_conta.validate_on_submit() and 'submit_criar_conta' in request.form:
+        usuario = Usuario(username=form_criar_conta.username.data,
+                          password=bcrypt.generate_password_hash(form_criar_conta.password.data),
+                          email=form_criar_conta.email.data)
+        database.session.add(usuario)
+        database.session.commit()
         flash(f'Conta criada com sucesso: {form_criar_conta.email_confirmation.data}', 'alert-success')
         return redirect(url_for('home'))
     return render_template('login.html', form_login=form_login, form_criar_conta=form_criar_conta)
