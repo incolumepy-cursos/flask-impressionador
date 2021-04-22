@@ -86,8 +86,15 @@ def perfil():
 @login_required
 def perfil_editar():
     form = FormEditarPerfil()
+    if form.validate_on_submit():
+        current_user.email = form.email.data
+        current_user.username = form.username.data
+        database.session.commit()
+        flash(f'Perfil atualizado com sucesso', 'alert-success')
+        return render_template(url_for('perfil'))
+
     foto_perfil = url_for('static', filename=f'foto_perfil/{current_user.foto}')
-    return render_template('perfil_editar.html', form=form, foto_perfil=foto_perfil, usuario=current_user)
+    return render_template('perfil_editar.html', form=form, foto_perfil=foto_perfil)
 
 
 @app.route('/post/criar')
