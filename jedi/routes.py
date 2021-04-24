@@ -7,6 +7,9 @@ from jedi.models import Usuario
 from jedi.forms import FormCriarConta, FormLogin, FormEditarPerfil
 from flask import render_template, url_for, request, flash, redirect
 from flask_login import login_user, logout_user, current_user, login_required
+from pathlib import Path
+from PIL import Image
+import secrets
 
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
@@ -82,6 +85,16 @@ def perfil():
     return render_template('perfil.html', foto_perfil=foto_perfil)
 
 
+def save_img(image, size: tuple = None):
+    size = size or (400, 400)
+    filename = Path(app.root_path).joinpath('static/foto_perfil', image.filename)
+    filename = filename.with_name(f"{filename.stem}-{secrets.token_hex(8)}{filename.suffix}")
+    thumb = Image.open(image)
+    thumb.thumbnail(size)
+    thumb.save(filename)
+    return filename.name
+
+
 @app.route('/perfil/editar', methods=['GET', 'POST'])
 @login_required
 def perfil_editar():
@@ -89,6 +102,10 @@ def perfil_editar():
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.username = form.username.data
+        if form.foto_perfil.data:
+            image_name = save_img(form.foto_perfil.data)
+            print(image_name)
+            current_user.foto = image_name
         database.session.commit()
         flash(f'Perfil atualizado com sucesso', 'alert-success')
         return redirect(url_for('perfil'))
