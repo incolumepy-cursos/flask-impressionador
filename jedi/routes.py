@@ -9,6 +9,8 @@ from flask import render_template, url_for, request, flash, redirect
 from flask_login import login_user, logout_user, current_user, login_required
 from pathlib import Path
 from PIL import Image
+from unidecode import unidecode
+import datetime as dt
 import secrets
 
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
@@ -88,7 +90,10 @@ def perfil():
 def save_img(image, size: tuple = None):
     size = size or (400, 400)
     filename = Path(app.root_path).joinpath('static/foto_perfil', image.filename)
-    filename = filename.with_name(f"{filename.stem}-{secrets.token_hex(8)}{filename.suffix}")
+    filename = filename.with_name(
+        # unidecode(f"{filename.stem}-{secrets.token_hex(8)}{filename.suffix}").casefold().replace(' ', '_')
+        unidecode(f"{dt.datetime.now().timestamp()}-{filename.stem}{filename.suffix}").casefold().replace(' ', '_')
+    )
     thumb = Image.open(image)
     thumb.thumbnail(size)
     thumb.save(filename)
