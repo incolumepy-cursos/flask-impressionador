@@ -18,7 +18,7 @@ def login():
     if form_login.validate_on_submit() and 'submit_login' in request.form:
         usuario = Usuario.query.filter_by(email=form_login.email.data).first()
         if usuario and bcrypt.check_password_hash(usuario.password, form_login.password.data):
-            login_user(usuario, remember=form_login.lembrar_dados.data)   # Efetivar login
+            login_user(usuario, remember=form_login.lembrar_dados.data)  # Efetivar login
             flash(f'Login realizado com sucesso: {form_login.email.data}!', 'alert-success')
 
             next_page = request.args.get('next')
@@ -91,7 +91,7 @@ def perfil_editar():
         current_user.username = form.username.data
         database.session.commit()
         flash(f'Perfil atualizado com sucesso', 'alert-success')
-        return render_template(url_for('perfil'))
+        return redirect(url_for('perfil'))
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.username.data = current_user.username
