@@ -46,28 +46,14 @@
                 </div>
                 <hr width="80%" align="center"/>
                 <p> <b> Cursos: </b></p>
-                <div class="form-group">
-                    {{ form.curso_python_basico.label(class="form.check.label")}}
-                    {{ form.curso_python_basico(class="form.check.input")}}
-                    {{ form.curso_python_avancado.label(class="form.check.label")}}
-                    {{ form.curso_python_avancado(class="form.check.input")}}
-                    {{ form.curso_web_flask.label(class="form.check.label")}}
-                    {{ form.curso_web_flask(class="form.check.input")}}
-                    {{ form.curso_web_django.label(class="form.check.label")}}
-                    {{ form.curso_web_django(class="form.check.input")}}
-                    {{ form.curso_pandas.label(class="form.check.label")}}
-                    {{ form.curso_pandas(class="form.check.input")}}
-                    {{ form.curso_mineracao_dados.label(class="form.check.label")}}
-                    {{ form.curso_mineracao_dados(class="form.check.input")}}
-                    {{ form.curso_automacao_python.label(class="form.check.label")}}
-                    {{ form.curso_automacao_python(class="form.check.input")}}
-                    {{ form.curso_kv.label(class="form.check.label")}}
-                    {{ form.curso_kv(class="form.check.input")}}
-                    {{ form.curso_gui_tkinter.label(class="form.check.label")}}
-                    {{ form.curso_gui_tkinter(class="form.check.input")}}
-                    {{ form.curso_gui_pygui.label(class="form.check.label")}}
-                    {{ form.curso_gui_pygui(class="form.check.input")}}
-                </div>
+                {% for campo in form %}
+                    {% if campo.name.startswith('curso_') %}
+                        <div class="form-group">
+                            {{ campo(class="form.check.input")}}
+                            {{ campo.label(class="form.check.label")}}
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </fieldset>
             {{form.submit_editar_perfil(class="btn btn-primary mt-2")}}
         </form>
