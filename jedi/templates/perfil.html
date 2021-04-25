@@ -12,7 +12,7 @@
                 <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
                     <div class="d-flex flex-column">
                         <span class="articles">Cursos</span>
-                        <span class="number1">{{ cursos }}</span>
+                        <span class="number1">{{ len(ast.literal_eval(current_user.cursos)) }}</span>
                     </div>
                     <div class="d-flex flex-column"> <span class="rating">Posts</span> <span class="number3">89</span> </div>
                 </div>

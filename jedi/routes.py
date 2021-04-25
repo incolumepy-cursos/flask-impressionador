@@ -14,6 +14,7 @@ import datetime as dt
 import secrets
 import ast
 
+
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 
@@ -85,11 +86,7 @@ def logout():
 @login_required
 def perfil():
     foto_perfil = url_for('static', filename=f'foto_perfil/{current_user.foto}')
-    content = {
-        'foto_perfil': foto_perfil,
-        'cursos': len(ast.literal_eval(current_user.cursos)),
-    }
-    return render_template('perfil.html', **content)
+    return render_template('perfil.html', foto_perfil=foto_perfil)
 
 
 def save_img(image, size: tuple = None):
