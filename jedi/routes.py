@@ -14,7 +14,6 @@ import datetime as dt
 import secrets
 import ast
 
-
 lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
 
 
