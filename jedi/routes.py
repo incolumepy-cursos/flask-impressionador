@@ -85,7 +85,10 @@ def logout():
 @login_required
 def perfil():
     foto_perfil = url_for('static', filename=f'foto_perfil/{current_user.foto}')
-    return render_template('perfil.html', foto_perfil=foto_perfil)
+    content = {
+        'foto_perfil': foto_perfil,
+    }
+    return render_template('perfil.html', **content)
 
 
 def save_img(image, size: tuple = None):
@@ -101,6 +104,15 @@ def save_img(image, size: tuple = None):
     return filename.name
 
 
+def atualizar_cursos(form):
+    result = []
+    for campo in form:
+        if campo.data:
+            if 'curso_' in campo.name:
+                result.append(campo.label.text)
+    return ';'.join(result)
+
+
 @app.route('/perfil/editar', methods=['GET', 'POST'])
 @login_required
 def perfil_editar():
@@ -112,6 +124,7 @@ def perfil_editar():
             image_name = save_img(form.foto_perfil.data)
             print(image_name)
             current_user.foto = image_name
+        current_user.cursos = atualizar_cursos(form)
         database.session.commit()
         flash(f'Perfil atualizado com sucesso', 'alert-success')
         return redirect(url_for('perfil'))
