@@ -14,8 +14,6 @@ import datetime as dt
 import secrets
 import ast
 
-lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -70,6 +68,7 @@ def contato():
 @app.route('/usuarios')
 @login_required
 def usuarios():
+    lista_usuarios = ['Lira', 'Brito', 'Ana', 'Ada', 'Eliana', 'Leni', 'Ricardo']
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
 
