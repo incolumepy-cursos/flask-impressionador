@@ -110,7 +110,7 @@ def atualizar_cursos(form):
         if campo.data:
             if 'curso_' in campo.name:
                 result.append(campo.label.text)
-    return ';'.join(result)
+    return ';'.join(result) if result else 'Não Informado'
 
 
 @app.route('/perfil/editar', methods=['GET', 'POST'])
