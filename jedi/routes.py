@@ -57,7 +57,7 @@ def hello_world():
 
 @app.route('/index')
 def index():
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.id.desc())
     return render_template('index.html', posts=posts)
 
 
