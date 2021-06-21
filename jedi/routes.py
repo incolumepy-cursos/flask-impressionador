@@ -3,8 +3,8 @@
 __author__ = '@britodfbr'
 
 from jedi import app, database, bcrypt
-from jedi.models import Usuario
-from jedi.forms import FormCriarConta, FormLogin, FormEditarPerfil
+from jedi.models import Usuario, Post
+from jedi.forms import FormCriarConta, FormLogin, FormEditarPerfil, FormCriarPost
 from flask import render_template, url_for, request, flash, redirect
 from flask_login import login_user, logout_user, current_user, login_required
 from pathlib import Path
@@ -140,7 +140,14 @@ def perfil_editar():
     return render_template('perfil_editar.html', form=form, foto_perfil=foto_perfil)
 
 
-@app.route('/post/criar')
+@app.route('/post/criar', methods=['GET', 'POST'])
 @login_required
 def criar_post():
-    return render_template('post_criar.html')
+    form = FormCriarPost()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, message=form.message.data, author=current_user)
+        database.session.add(post)
+        database.session.commit()
+        flash("Post criado com sucesso!", "alert-success")
+        return redirect(url_for('index'))
+    return render_template('post_criar.html', form=form)
