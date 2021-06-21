@@ -3,4 +3,19 @@
 {% block body%}
 <h1>Hello, World</h1>
 <p>Hello, World!</p>
+<hr/>
+{% for post in posts[::-1] %}
+<div class="row border mt-4 p-3 posts">
+    <div class="col col-3">
+        <div class="image pe-2">
+            <img src="{{ foto_perfil }}" class="rounded" width="200">
+        </div>
+    </div>
+    <div class="col col-9">
+        <h3>{{post.title}}</h3>
+        <p>{{ post.message }}</p>
+        <address>{{post.criated}}</address>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}

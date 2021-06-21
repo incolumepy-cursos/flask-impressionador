@@ -6,6 +6,7 @@ from datetime import datetime
 from jedi import database, login_manager
 from flask_login import UserMixin
 
+
 @login_manager.user_loader
 def load_user(id_user):
     return Usuario.query.get(int(id_user))
