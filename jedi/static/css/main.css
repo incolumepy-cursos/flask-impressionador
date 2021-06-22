@@ -40,3 +40,7 @@
 .posts{
   background: #f2f5f8;
 }
+
+.posts h3 a {
+  text-decoration: none;
+}
