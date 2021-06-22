@@ -152,3 +152,9 @@ def criar_post():
         flash("Post criado com sucesso!", "alert-success")
         return redirect(url_for('index'))
     return render_template('post_criar.html', form=form)
+
+
+@app.route('/post/<post_id>')
+def post_view(post_id):
+    post = Post.query.get(post_id)
+    return render_template('post.html', post=post)

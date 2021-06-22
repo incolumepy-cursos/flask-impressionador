@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{%block title %}::Post{% endblock %}
+{% block body%}
+<div class="row border mt-4 p-3 posts">
+    <div class="col col-3">
+        <strong> {{post.author.username}} </strong>
+        <div class="image pe-2">
+            <img src="{{ url_for('static', filename='foto_perfil/{}'.format(post.author.foto)) }}" class="rounded" width="200">
+        </div>
+        <div class="row justify-content-center">
+            {% for curso in post.author.cursos.split(';') %}
+            <button type="button" class="btn btn-success mt-2" disabled> {{ curso }} </button>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col col-9">
+        <h3>{{post.title}}</h3>
+        <p>{{ post.message }}</p>
+        <address>{{post.criated}}</address>
+    </div>
+</div>
+{% endblock %}
