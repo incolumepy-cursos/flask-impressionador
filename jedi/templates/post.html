@@ -19,8 +19,8 @@
             <small class="text-muted">
                 [{{post.criated.strftime('%F %T')}}]
                 {% if form %}
-                <a href="#"> - Editar Post</a>
                 <a href="#"> - Excluir Post</a>
+                <a href="#form_editarpost"> - Editar Post</a>
                 {% endif %}
             </small>
         </h3>
@@ -31,7 +31,7 @@
 <div class="row">
     <div class="col">
         <hr />
-        <form method="POST" action="" class="border p-4 mt-2" enctype="multipart/form-data">
+        <form method="POST" action="" id="form_editarpost" class="border p-4 mt-2" enctype="multipart/form-data">
             {{ form.csrf_token }}
             <legend>Editar Post</legend>
             <fieldset>
