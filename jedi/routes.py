@@ -154,7 +154,21 @@ def criar_post():
     return render_template('post_criar.html', form=form)
 
 
-@app.route('/post/<post_id>')
+@app.route('/post/<post_id>', methods=['GET', 'POST'])
+@login_required
 def post_view(post_id):
     post = Post.query.get(post_id)
-    return render_template('post.html', post=post)
+    if current_user == post.author:
+        form = FormCriarPost()
+        if request.method == 'GET':
+            form.title.data = post.title
+            form.message.data = post.message
+        elif form.validate_on_submit():
+            post.title = form.title.data
+            post.message = form.message.data
+            database.session.commit()
+            flash('Post atualizado com sucesso!', 'alert-success')
+            return redirect(url_for('index'))
+    else:
+        form = None
+    return render_template('post.html', post=post, form=form)
