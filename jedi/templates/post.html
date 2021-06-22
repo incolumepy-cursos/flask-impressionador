@@ -14,8 +14,16 @@
         </div>
     </div>
     <div class="col col-9">
-        <h3>{{post.title}}</h3>
-        <address>{{post.criated}}</address>
+        <h3>
+            {{post.title}}
+            <small class="text-muted">
+                [{{post.criated.strftime('%F %T')}}]
+                {% if form %}
+                <a href="#"> - Editar Post</a>
+                <a href="#"> - Excluir Post</a>
+                {% endif %}
+            </small>
+        </h3>
         <p>{{ post.message }}</p>
     </div>
 </div>
