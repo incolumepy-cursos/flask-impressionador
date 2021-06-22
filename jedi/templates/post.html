@@ -19,8 +19,8 @@
             <small class="text-muted">
                 [{{post.criated.strftime('%F %T')}}]
                 {% if form %}
-                <a href="#"> - Excluir Post</a>
                 <a href="#form_editarpost"> - Editar Post</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExcluirPost"> - Excluir Post</a>
                 {% endif %}
             </small>
         </h3>
