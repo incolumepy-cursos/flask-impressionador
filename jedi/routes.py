@@ -75,7 +75,8 @@ def contato():
 @login_required
 def usuarios():
     # lista_usuarios = Usuario.query.all()    # Todos os usuários
-    lista_usuarios = Usuario.query.order_by(Usuario.username.desc())    # Todos os usuários em ordem reversa
+    # lista_usuarios = Usuario.query.order_by(Usuario.username.desc())    # Todos os usuários em ordem reversa
+    lista_usuarios = Usuario.query.order_by(Usuario.username)    # Todos os usuários em ordem alfabetica
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
 
