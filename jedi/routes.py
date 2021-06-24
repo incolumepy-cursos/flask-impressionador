@@ -5,7 +5,7 @@ __author__ = '@britodfbr'
 from jedi import app, database, bcrypt
 from jedi.models import Usuario, Post
 from jedi.forms import FormCriarConta, FormLogin, FormEditarPerfil, FormCriarPost
-from flask import render_template, url_for, request, flash, redirect, abort
+from flask import render_template, url_for, request, flash, redirect, abort, make_response, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 from pathlib import Path
 from PIL import Image
@@ -41,6 +41,11 @@ def login():
         flash(f'Conta criada com sucesso: {form_criar_conta.email_confirmation.data}', 'alert-success')
         return redirect(url_for('home'))
     return render_template('login.html', form_login=form_login, form_criar_conta=form_criar_conta)
+
+
+@app.errorhandler(403)
+def custom_error(error):
+    return make_response(jsonify({'message': error.description}), 403)
 
 
 @app.route('/sobre-nos')
