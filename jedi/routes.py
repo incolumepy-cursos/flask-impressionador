@@ -5,7 +5,7 @@ __author__ = '@britodfbr'
 from jedi import app, database, bcrypt
 from jedi.models import Usuario, Post
 from jedi.forms import FormCriarConta, FormLogin, FormEditarPerfil, FormCriarPost
-from flask import render_template, url_for, request, flash, redirect
+from flask import render_template, url_for, request, flash, redirect, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from pathlib import Path
 from PIL import Image
@@ -172,3 +172,16 @@ def post_view(post_id):
     else:
         form = None
     return render_template('post.html', post=post, form=form)
+
+
+@app.route('/post/<post_id>/delete', methods=['GET', 'POST'])
+@login_required
+def post_delete(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.author:
+        database.session.delete(post)
+        database.session.commit()
+        flash('Post excluído com sucesso!', 'alert-success')
+        return redirect(url_for('index'))
+    else:
+        abort(403)
