@@ -78,8 +78,10 @@
         Deseja realmente prosseguir? (Esta ação no poderá ser desfeita)
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <form method="post" action="{{ url_for('post_delete', post_id=post.id)}}">
+           <button type="submit" class="btn btn-danger">Excluir Post</button>
+        </form>
       </div>
     </div>
   </div>
