@@ -4,14 +4,18 @@
 <div class="row justify-content-center">
     <div class="col-xs-1 text-center">
         <H1>Junta Especializada de Desenvolvimento e Inovação (JEDI)</H1>
-        <img src="{{ url_for('static', filename='img/alert_icon.png') }}" width="200" />
-        <p>
-            <strong> {{ error.code }} </strong>
-        </p>
-        <p>
-            <strong>{{ error.name }}</strong>
-        </p>
-        <p>{{ error.description}}</p>
+        <figure class="figure">
+            <img
+                src="{{ url_for('static', filename='img/alert_icon.png') }}"
+                width="200"
+                class="figure-img img-fluid rounded"
+                alt="Figura de Alerta"
+            />
+            <figcaption class="figure-caption text-center">
+                <strong> {{ error.code }}</strong>: <strong>{{ error.name }}</strong>
+            </figcaption>
+        </figure>
+        <p class="alert-danger">{{ error.description}}</p>
     </div>
 </div>
 
