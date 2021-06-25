@@ -51,8 +51,8 @@ def custom_json_error(error):
 @app.errorhandler(403)
 @app.errorhandler(404)
 def curstom_error(error):
-    flash("{}: {}".format(error.code, error.name), "alert-danger")
-    flash(error.description, "alert-danger")
+    # flash("{}: {}".format(error.code, error.name), "alert-danger")
+    # flash(error.description, "alert-danger")
     return render_template('errors.html', error=error), 403
 
 

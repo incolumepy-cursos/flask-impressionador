@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body%}
-<div class="row justify-content-center">
-    <div class="col-xs-1 text-center">
-        <H1>Junta Especializada de Desenvolvimento e Inovação (JEDI)</H1>
+<div class="row justify-content-center text-center">
+    <H1>Junta Especializada de Desenvolvimento e Inovação (JEDI)</H1>
+    <div class="col-xs-1 text-center alert-danger">
         <figure class="figure">
             <img
                 src="{{ url_for('static', filename='img/alert_icon.png') }}"
@@ -15,7 +15,11 @@
                 <strong> {{ error.code }}</strong>: <strong>{{ error.name }}</strong>
             </figcaption>
         </figure>
-        <p class="alert-danger">{{ error.description}}</p>
+        <p>
+            <strong>
+                {{ error.description}}
+            </strong>
+        </p>
     </div>
 </div>
 
