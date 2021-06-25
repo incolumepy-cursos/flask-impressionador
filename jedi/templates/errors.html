@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body%}
+<div class="row justify-content-center">
+    <div class="col-xs-1 text-center">
+        <H1>Junta Especializada de Desenvolvimento e Inovação (JEDI)</H1>
+        <img src="{{ url_for('static', filename='img/alert_icon.png') }}" width="200" />
+        <p>
+            <strong> {{ error.code }} </strong>
+        </p>
+        <p>
+            <strong>{{ error.name }}</strong>
+        </p>
+        <p>{{ error.description}}</p>
+    </div>
+</div>
+
+{% endblock %}
