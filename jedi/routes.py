@@ -43,9 +43,15 @@ def login():
     return render_template('login.html', form_login=form_login, form_criar_conta=form_criar_conta)
 
 
+@app.errorhandler(400)
+def custom_json_error(error):
+    return make_response(jsonify({'code': error.code, 'name': error.name, 'message': error.description}), 400)
+
+
 @app.errorhandler(403)
-def custom_error(error):
-    return make_response(jsonify({'message': error.description}), 403)
+@app.route('/api/error-test', methods=['GET', 'POST'])
+def test():
+    abort(400, 'Ops, custom error message..')
 
 
 @app.route('/sobre-nos')
