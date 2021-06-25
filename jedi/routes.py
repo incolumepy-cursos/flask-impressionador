@@ -49,6 +49,13 @@ def custom_json_error(error):
 
 
 @app.errorhandler(403)
+@app.errorhandler(404)
+def curstom_error(error):
+    flash("{}: {}".format(error.code, error.name), "alert-danger")
+    flash(error.description, "alert-danger")
+    return render_template('errors.html', error=error), 403
+
+
 @app.route('/api/error-test', methods=['GET', 'POST'])
 def test():
     abort(400, 'Ops, custom error message..')
